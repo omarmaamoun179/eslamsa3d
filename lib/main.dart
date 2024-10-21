@@ -1,37 +1,46 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:flutter_gallery_3d/gallery3d.dart';
 import 'package:flutter_neumorphic_plus/flutter_neumorphic.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:model_viewer_plus/model_viewer_plus.dart';
 
-
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return NeumorphicApp(
-      debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.light,
-      theme: const NeumorphicThemeData(
-        baseColor: Color(0xFF3E3E3E),
-        lightSource: LightSource.topLeft,
-        depth: 10,
+    return const ScreenUtilInit(
+      ensureScreenSize: true,
+      minTextAdapt: true,
+      useInheritedMediaQuery: true,
+      splitScreenMode: true,
+      designSize: Size(375, 812),
+      child: NeumorphicApp(
+        debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.light,
+        theme: NeumorphicThemeData(
+          baseColor: Color(0xFF3E3E3E),
+          lightSource: LightSource.topLeft,
+          depth: 10,
+        ),
+        home: LoginScreen(),
       ),
-      home: LoginScreen(),
     );
   }
 }
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
@@ -53,13 +62,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Left-aligned text
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Let's login",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -67,7 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Text(
                         "and start creativity ",
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 24.sp,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -77,22 +86,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Right-aligned logo
                   Image.asset(
                     'assets/images/logo.png', // Path to the uploaded logo file
-                    height: 100,
+                    height: 50.h,
+                    width: 50.w,
                     color: Colors.white,
                   ),
                 ],
               ),
               const Spacer(),
               // Best fashion 3D Design App text centered
-              const Text(
+              Text(
                 "Best fashion 3D Design App💥",
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 24.sp,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               // Centered content (fields)
               IntlPhoneField(
                 decoration: const InputDecoration(
@@ -111,12 +121,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 onChanged: (phone) {
                   print(phone.completeNumber);
                 },
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 // Set the input text color to white
                 cursorColor: Colors.white, // Set the cursor color to white
               ),
 
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               Neumorphic(
                 style: const NeumorphicStyle(
                   depth: -5,
@@ -129,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     filled: true,
                     fillColor: Colors.black,
                     labelText: 'Password',
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: const TextStyle(color: Colors.white),
                     border: const OutlineInputBorder(
                       borderSide: BorderSide(),
                     ),
@@ -146,7 +156,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                   ),
-                  style: TextStyle(color: Colors.white), // Text color is white
+                  style: const TextStyle(
+                      color: Colors.white), // Text color is white
                   cursorColor: Colors.white, // Cursor color is white
                 ),
               ),
@@ -160,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ForgetPasswordScreen()),
+                          builder: (context) => const ForgetPasswordScreen()),
                     );
                   },
                   child: const Text(
@@ -172,13 +183,14 @@ class _LoginScreenState extends State<LoginScreen> {
               const Spacer(),
               // Login Button
               Padding(
-                padding: const EdgeInsets.only(bottom: 20.0),
+                padding: EdgeInsets.only(bottom: 20.0.h),
                 // Adjusted the padding
                 child: NeumorphicButton(
                   onPressed: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
                     );
                   },
                   style: NeumorphicStyle(
@@ -189,12 +201,12 @@ class _LoginScreenState extends State<LoginScreen> {
                     intensity: 0.8,
                     color: const Color(0x00000025),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(12.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
                     child: Center(
                       child: Text(
                         'Login',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        style: TextStyle(color: Colors.white, fontSize: 18.sp),
                       ),
                     ),
                   ),
@@ -205,12 +217,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SignUpScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const SignUpScreen()),
                   );
                 },
-                child: const Text(
+                child: Text(
                   "Let's create a special account 👑",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
                 ),
               ),
             ],
@@ -224,6 +237,8 @@ class _LoginScreenState extends State<LoginScreen> {
 // ForgetPasswordScreen
 
 class ForgetPasswordScreen extends StatelessWidget {
+  const ForgetPasswordScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -253,17 +268,17 @@ class ForgetPasswordScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // Text above phone number field with 100 padding
-              const Padding(
-                padding: EdgeInsets.only(bottom: 100.0, top: 300.0),
+              Padding(
+                padding: EdgeInsets.only(bottom: 100.0.h, top: 300.0.h),
                 child: Column(
                   children: [
-                    Text(
+                    const Text(
                       "Just add your number",
                       style: TextStyle(color: Colors.white, fontSize: 18),
                     ),
                     Text(
                       "We will send OTP 📲",
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: TextStyle(color: Colors.white, fontSize: 18.sp),
                     ),
                   ],
                 ),
@@ -291,29 +306,29 @@ class ForgetPasswordScreen extends StatelessWidget {
               const Spacer(),
               // Send OTP Button with bottom padding of 50
               Padding(
-                padding: const EdgeInsets.only(bottom: 50.0),
+                padding: EdgeInsets.only(bottom: 50.0.h),
                 child: NeumorphicButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => OtpVerificationScreen()),
+                          builder: (context) => const OtpVerificationScreen()),
                     );
                   },
                   style: NeumorphicStyle(
                     shape: NeumorphicShape.convex,
-                    boxShape:
-                        NeumorphicBoxShape.roundRect(BorderRadius.circular(12)),
+                    boxShape: NeumorphicBoxShape.roundRect(
+                        BorderRadius.circular(12.r)),
                     depth: 8,
                     intensity: 0.8,
                     color: const Color(0x00000025), // Dark button color
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(12.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
                     child: Center(
                       child: Text(
                         'Send OTP',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        style: TextStyle(color: Colors.white, fontSize: 18.sp),
                       ),
                     ),
                   ),
@@ -328,6 +343,8 @@ class ForgetPasswordScreen extends StatelessWidget {
 }
 
 class OtpVerificationScreen extends StatelessWidget {
+  const OtpVerificationScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -353,11 +370,11 @@ class OtpVerificationScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text(
+              Text(
                 "Enter the OTP sent to your number",
-                style: TextStyle(color: Colors.white, fontSize: 18),
+                style: TextStyle(color: Colors.white, fontSize: 18.sp),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               // OTP Text Field
               OtpTextField(
                 numberOfFields: 6,
@@ -370,18 +387,18 @@ class OtpVerificationScreen extends StatelessWidget {
                   // When the code is submitted
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
                   );
                 }, // end onSubmit
               ),
-              const SizedBox(height: 50),
+              SizedBox(height: 50.h),
               // Verify Button
               NeumorphicButton(
                 onPressed: () {
                   // Handle OTP verification
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
                   );
                 },
                 style: NeumorphicStyle(
@@ -392,12 +409,12 @@ class OtpVerificationScreen extends StatelessWidget {
                   intensity: 0.8,
                   color: const Color(0x00000025),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.all(12.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.0),
                   child: Center(
                     child: Text(
                       'Verify OTP',
-                      style: TextStyle(color: Colors.white, fontSize: 18),
+                      style: TextStyle(color: Colors.white, fontSize: 18.sp),
                     ),
                   ),
                 ),
@@ -411,13 +428,15 @@ class OtpVerificationScreen extends StatelessWidget {
 }
 
 class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
+
   @override
   _SignUpScreenState createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
   bool _obscureText = true;
-  bool _obscureTextConfirm = true;
+  final bool _obscureTextConfirm = true;
 
   @override
   Widget build(BuildContext context) {
@@ -433,13 +452,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   // Left-aligned text
-                  const Column(
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Create Account",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: 18.sp,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -447,7 +466,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Text(
                         "Join the community ",
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 24.sp,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -473,7 +492,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               // Phone Number Field
               IntlPhoneField(
                 decoration: const InputDecoration(
@@ -492,11 +511,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 onChanged: (phone) {
                   print(phone.completeNumber);
                 },
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 // Set the input text color to white
                 cursorColor: Colors.white, // Set the cursor color to white
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               // Password Field
               Neumorphic(
                 style: const NeumorphicStyle(
@@ -510,7 +529,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     filled: true,
                     fillColor: Colors.black,
                     labelText: 'Password',
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: const TextStyle(color: Colors.white),
                     border: const OutlineInputBorder(
                       borderSide: BorderSide(),
                     ),
@@ -527,11 +546,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                     ),
                   ),
-                  style: TextStyle(color: Colors.white), // Text color is white
+                  style: const TextStyle(
+                      color: Colors.white), // Text color is white
                   cursorColor: Colors.white, // Cursor color is white
                 ),
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               // Confirm Password Field
               Neumorphic(
                 style: const NeumorphicStyle(
@@ -545,7 +565,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     filled: true,
                     fillColor: Colors.black,
                     labelText: 'confirmation Password',
-                    labelStyle: TextStyle(color: Colors.white),
+                    labelStyle: const TextStyle(color: Colors.white),
                     border: const OutlineInputBorder(
                       borderSide: BorderSide(),
                     ),
@@ -562,7 +582,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                     ),
                   ),
-                  style: TextStyle(color: Colors.white), // Text color is white
+                  style: const TextStyle(
+                      color: Colors.white), // Text color is white
                   cursorColor: Colors.white, // Cursor color is white
                 ),
               ),
@@ -574,7 +595,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: NeumorphicButton(
                   onPressed: () {
                     Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()),
                     );
                   },
                   style: NeumorphicStyle(
@@ -585,12 +607,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     intensity: 0.8,
                     color: const Color(0x00000025),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(12.0),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
                     child: Center(
                       child: Text(
                         'Sign Up',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
+                        style: TextStyle(color: Colors.white, fontSize: 18.sp),
                       ),
                     ),
                   ),
@@ -605,6 +627,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 }
 
 class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
+
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
@@ -649,7 +673,8 @@ class _HomeScreenState extends State<HomeScreen> {
     'assets/images/download.jpeg',
   ];
 
-  final Gallery3DController _galleryController = Gallery3DController(itemCount: 5);
+  final Gallery3DController _galleryController =
+      Gallery3DController(itemCount: 5);
 
   @override
   Widget build(BuildContext context) {
@@ -698,7 +723,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
 
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
 
               // MasonryGridView for product cards
               Padding(
@@ -732,7 +757,8 @@ class ProductCard extends StatefulWidget {
   final List<Product> products;
   final int index;
 
-  ProductCard({
+  const ProductCard({
+    super.key,
     required this.product,
     required this.products,
     required this.index,
@@ -760,7 +786,6 @@ class _ProductCardState extends State<ProductCard> {
         );
       },
       child: Container(
-
         child: Card(
           color: Colors.black,
           shape: RoundedRectangleBorder(
@@ -770,7 +795,8 @@ class _ProductCardState extends State<ProductCard> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(15.0)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(15.0)),
                 child: Image.asset(
                   widget.product.image,
                   fit: BoxFit.cover,
@@ -786,9 +812,9 @@ class _ProductCardState extends State<ProductCard> {
                       children: [
                         Text(
                           widget.product.title,
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                           ),
                           maxLines: 1,
@@ -796,9 +822,9 @@ class _ProductCardState extends State<ProductCard> {
                         ),
                         Text(
                           "${widget.product.Price}k EG",
-                          style: const TextStyle(
+                          style: TextStyle(
                             color: Colors.white,
-                            fontSize: 16,
+                            fontSize: 16.sp,
                             fontWeight: FontWeight.bold,
                           ),
                           maxLines: 1,
@@ -808,7 +834,7 @@ class _ProductCardState extends State<ProductCard> {
                     ),
                     Text(
                       widget.product.subtitle,
-                      style: const TextStyle(color: Colors.white70, fontSize: 12),
+                      style: TextStyle(color: Colors.white70, fontSize: 12.sp),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -837,12 +863,12 @@ class _ProductCardState extends State<ProductCard> {
   }
 }
 
-
 class ProductDetailsScreen extends StatefulWidget {
   final List<Product> products;
   final int initialIndex;
 
-  ProductDetailsScreen({required this.products, required this.initialIndex});
+  const ProductDetailsScreen(
+      {super.key, required this.products, required this.initialIndex});
 
   @override
   _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
@@ -875,7 +901,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 
   void _startAutoScroll() {
-    _timer = Timer.periodic(Duration(seconds: 3), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 3), (timer) {
       if (_currentImageIndex < 4) {
         _currentImageIndex++;
       } else {
@@ -883,7 +909,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       }
       _imageListController.animateToPage(
         _currentImageIndex,
-        duration: Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 500),
         curve: Curves.easeInOut,
       );
     });
@@ -921,13 +947,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => ModelViewerScreen(product: widget.products[_currentIndex]),
+              builder: (context) =>
+                  ModelViewerScreen(product: widget.products[_currentIndex]),
             ),
           );
         },
         backgroundColor: Colors.white,
-        child: const Icon(Icons.threed_rotation, color: Colors.black),
         tooltip: 'View 3D Model',
+        child: const Icon(Icons.threed_rotation, color: Colors.black),
       ),
     );
   }
@@ -959,10 +986,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           // Horizontal Image List
           SizedBox(
-            height: 100,
+            height: 100.h,
             child: PageView.builder(
               controller: _imageListController,
               itemCount: imagePaths.length,
@@ -991,7 +1018,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               },
             ),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           // Product Details
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -1000,20 +1027,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               children: [
                 Text(
                   product.title,
-                  style: const TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 24.sp,
+                      fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.h),
                 Text(
                   product.subtitle,
-                  style: const TextStyle(color: Colors.white70, fontSize: 16),
+                  style: TextStyle(color: Colors.white70, fontSize: 16.sp),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "EGP ${product.Price}",
-                      style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.sp,
+                          fontWeight: FontWeight.bold),
                     ),
                     RatingBar.builder(
                       initialRating: 3,
@@ -1022,7 +1055,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       allowHalfRating: true,
                       itemCount: 5,
                       itemSize: 20,
-                      itemBuilder: (context, _) => Icon(
+                      itemBuilder: (context, _) => const Icon(
                         Icons.star,
                         color: Colors.amber,
                       ),
@@ -1032,29 +1065,30 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 Text(
                   "Color",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.h),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: Colors.grey[800],
                     borderRadius: BorderRadius.circular(4),
                   ),
-                  child: Text(
+                  child: const Text(
                     "Black",
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 Text(
                   "Size",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  style: TextStyle(color: Colors.white, fontSize: 16.sp),
                 ),
-                const SizedBox(height: 8),
+                SizedBox(height: 8.h),
                 Wrap(
                   spacing: 8,
                   children: sizes.map((size) {
@@ -1069,23 +1103,24 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       backgroundColor: Colors.grey[800],
                       selectedColor: Colors.white,
                       labelStyle: TextStyle(
-                        color: selectedSize == size ? Colors.black : Colors.white,
+                        color:
+                            selectedSize == size ? Colors.black : Colors.white,
                       ),
                     );
                   }).toList(),
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       "Quantity",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+                      style: TextStyle(color: Colors.white, fontSize: 16.sp),
                     ),
                     Row(
                       children: [
                         IconButton(
-                          icon: Icon(Icons.remove, color: Colors.white),
+                          icon: const Icon(Icons.remove, color: Colors.white),
                           onPressed: () {
                             setState(() {
                               if (quantity > 1) quantity--;
@@ -1093,18 +1128,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           },
                         ),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 6),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.white),
                             borderRadius: BorderRadius.circular(4),
                           ),
                           child: Text(
                             quantity.toString(),
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                         ),
                         IconButton(
-                          icon: Icon(Icons.add, color: Colors.white),
+                          icon: const Icon(Icons.add, color: Colors.white),
                           onPressed: () {
                             setState(() {
                               quantity++;
@@ -1115,7 +1151,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 24),
+                SizedBox(height: 24.h),
                 Row(
                   children: [
                     Expanded(
@@ -1123,15 +1159,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         style: ElevatedButton.styleFrom(
                           foregroundColor: Colors.black,
                           backgroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(vertical: 16),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
                         onPressed: () {
-                          print('Added to cart: ${product.title}, Size: $selectedSize, Quantity: $quantity');
+                          print(
+                              'Added to cart: ${product.title}, Size: $selectedSize, Quantity: $quantity');
                         },
-                        child: Text('ADD TO CART'),
+                        child: const Text('ADD TO CART'),
                       ),
                     ),
-                    SizedBox(width: 16), // Space for floating action button
+                    SizedBox(width: 16.w), // Space for floating action button
                   ],
                 ),
               ],
@@ -1152,11 +1189,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   }
 }
 
-
 class ImageViewerScreen extends StatelessWidget {
   final String imagePath;
 
-  ImageViewerScreen({required this.imagePath});
+  const ImageViewerScreen({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -1165,13 +1201,13 @@ class ImageViewerScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Image Viewer"),
       ),
-      body: Container(
-        height: 1000,
-        width: 1000,
+      body: SizedBox(
+        height: 1000.h,
+        width: 1000.w,
         child: InteractiveViewer(
           panEnabled: true, // Allows panning
-          minScale: 0.5,    // Minimum zoom scale
-          maxScale: 4.0,    // Maximum zoom scale
+          minScale: 0.5, // Minimum zoom scale
+          maxScale: 4.0, // Maximum zoom scale
           child: Image.asset(
             imagePath,
             fit: BoxFit.contain,
@@ -1181,10 +1217,11 @@ class ImageViewerScreen extends StatelessWidget {
     );
   }
 }
+
 class ModelViewerScreen extends StatelessWidget {
   final Product product;
 
-  ModelViewerScreen({required this.product});
+  const ModelViewerScreen({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
